@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      target: exec
+      dockerfile: Dockerfile
+    tty: true
+    links:
+      - db
+    ports:
+      - 4000:4000
+      - 2222:22
+  db:
+    image: postgres:15.3-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
